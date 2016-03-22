@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -16,7 +18,7 @@ import org.junit.Test;
 public class Lambda4 {
 
 	/**
-	 * Predicate、Function、Supplier、Consumer
+	 * Predicate、Function、Supplier、Consumer、Runnable、Callable
 	 */
 	
 	@Test
@@ -55,12 +57,25 @@ public class Lambda4 {
 	@Test
 	public void testComparator(){
 		Comparator<Person> personComparator = (p1,p2)->{
-			return p1.getAge()-p1.getAge();};
+			return p1.getAge()-p2.getAge();};
 		
 		List<Person> persons = Arrays.asList(new Person(25,"KD"),
 											 new Person(10,"KB"),
 											 new Person(15,"LBJ")
 											);
 		persons.sort(personComparator);
+		System.out.println(persons);
+	}
+	@Test
+	public void testRunnable(){
+		Runnable runnable = ()->System.out.println("run");
+		new Thread(runnable).start();
+	}
+	
+	@Test
+	public void testCallable() throws Exception{
+		Callable<UUID> callable = UUID::randomUUID;
+		UUID uuid = callable.call();
+		System.out.println(uuid);
 	}
 }
