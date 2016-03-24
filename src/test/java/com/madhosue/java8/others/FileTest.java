@@ -2,9 +2,17 @@ package com.madhosue.java8.others;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -70,5 +78,26 @@ public class FileTest {
 //			if(br!=null)
 //				try {br.close();} catch (IOException e) {e.printStackTrace();}
 //		}
+	}
+	
+	
+	@Test
+	public void testCountWords(){
+		//统计文章中文字出现的次数
+		Path path = Paths.get("files\\article.txt");
+		BufferedReader br = null;
+		try {
+			br = Files.newBufferedReader(path, Charset.forName("utf-8"));
+			Map<Object, Long> collect = br.lines()
+				.flatMap(line->line.chars().mapToObj(c->(char)c))
+				
+				.collect(Collectors.groupingBy(word->word, Collectors.counting()));
+			System.out.println(collect);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			if(br!=null)
+				try {br.close();} catch (IOException e) {e.printStackTrace();}
+		}
 	}
 }
