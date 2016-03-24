@@ -6,23 +6,23 @@ import org.junit.Test;
 
 public class Lambda3 {
 	@Test
-	public void test3(){
+	public void test1(){
 		/**
 		 * 方法引用(::)
 		 * 	1.静态方法引用
 		 * 	2.构造方法引用
 		 * 	3.普通方法引用
 		 */
-		SayHello say = Person::sayHello;
-		say.say("tom");
+		SayHello say = Person::sayHello;//静态方法引用
+		say.say("tom");//Hello,tom
 		
-		PersonFactory<Person> factory = Person::new;
+		PersonFactory<Person> factory = Person::new;//构造方法引用
 		Person person = factory.create(10, "xiaoming");
-		System.out.println(person);
+		System.out.println(person);//Person [age=10, name=xiaoming]
 		
-		SayHello  setName = person::setName;
+		SayHello  setName = person::setName;//普通方法引用
 		setName.say("xiaohong");
-		System.out.println(person);
+		System.out.println(person);//Person [age=10, name=xiaohong]
 	}
 	
 	@Test
