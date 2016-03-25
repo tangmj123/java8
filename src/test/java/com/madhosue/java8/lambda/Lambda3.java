@@ -8,7 +8,7 @@ public class Lambda3 {
 	@Test
 	public void test1(){
 		/**
-		 * 方法引用(::)
+		 * 方法引用(::) lambda的简写形式
 		 * 	1.静态方法引用
 		 * 	2.构造方法引用
 		 * 	3.普通方法引用

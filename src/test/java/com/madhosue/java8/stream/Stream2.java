@@ -160,11 +160,16 @@ public class Stream2 {
 	@Test
 	public void test8(){
 		List<Person> persons = new ArrayList<Person>();
+		persons.add(new Person(18,"tom"));
+		persons.add(new Person(10,"jin"));
+		persons.add(new Person(25,"lucy"));
+		persons.add(new Person(60,"green"));
 		persons.stream().forEach(p->{
-			if("tom".equals(p.getName()))
+			if("jin".equals(p.getName()))
 //				break;//不能使用
 //				continue;//不能使用
-				;
+				return;//将控制权交给匿名方法的调用者
+			System.out.println(p);
 		});
 	}
 }

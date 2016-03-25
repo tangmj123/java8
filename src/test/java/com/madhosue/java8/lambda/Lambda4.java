@@ -1,6 +1,7 @@
 package com.madhosue.java8.lambda;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +11,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -55,14 +57,16 @@ public class Lambda4 {
 	}
 	@Test
 	public void testComparator(){
-		Comparator<Person> personComparator = (p1,p2)->{
-			return p1.getAge()-p2.getAge();};
-		
-		List<Person> persons = Arrays.asList(new Person(25,"KD"),
-											 new Person(10,"KB"),
-											 new Person(15,"LBJ")
+		List<Person> persons = Arrays.asList(new Person(25,"tom"),
+											 new Person(10,"lucy"),
+											 new Person(15,"andy")
 											);
-		persons.sort(personComparator);
+		persons.sort((p1,p2)->p1.getAge()-p2.getAge());
+		
+		
+		Collections.sort(persons, (p1,p2)->p1.getName().compareTo(p2.getName()));
+		Collections.sort(persons,Comparator.comparing(p->p.getName()));
+		Collections.sort(persons,Comparator.comparing(Person::getName));
 		System.out.println(persons);
 		//[Person [age=10, name=KB], Person [age=15, name=LBJ], Person [age=25, name=KD]]
 	}

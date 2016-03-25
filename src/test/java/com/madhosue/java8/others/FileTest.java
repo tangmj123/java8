@@ -1,18 +1,14 @@
 package com.madhosue.java8.others;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -99,5 +95,15 @@ public class FileTest {
 			if(br!=null)
 				try {br.close();} catch (IOException e) {e.printStackTrace();}
 		}
+	}
+	
+	@Test
+	public void testFileFilter(){
+		FileFilter filter = f->f.getName().endsWith(".java");
+		boolean accept = filter.accept(new File("src\\test\\java\\com\\madhosue\\java8\\others\\FileTest.java"));
+		System.out.println(accept);
+		
+		accept = filter.accept(new File("files\\article.txt"));
+		System.out.println(accept);
 	}
 }
