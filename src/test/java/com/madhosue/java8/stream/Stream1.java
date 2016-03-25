@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.junit.Before;
@@ -129,5 +130,14 @@ public class Stream1 {
 		list.parallelStream()//并行流
 			.forEachOrdered(System.out::println);//顺序确定
 		
+	}
+	@Test
+	public void testOptational(){
+		Optional<String> findFirst = list.stream()
+			.filter(p->p.length()>3)
+			.findFirst();
+		if(findFirst.isPresent())
+			System.out.println(findFirst.get());
+		findFirst.ifPresent(System.out::println);
 	}
 }
