@@ -48,18 +48,11 @@ public class FileTest {
 	@Test
 	public void testReader(){
 		Path path = Paths.get("src\\test\\java\\com\\madhosue\\java8\\others\\FileTest.java");
-		BufferedReader br = null;
-		try {
-			br = Files.newBufferedReader(path);
-			br.lines()
-				.forEach(System.out::println);
+		try(BufferedReader br = Files.newBufferedReader(path);) {//java7 语法糖
+			br.lines().forEach(System.out::println);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
-			if(br!=null)
-				try {br.close();} catch (IOException e) {e.printStackTrace();}
 		}
-		
 //		try {
 //			br = new BufferedReader(
 //					new InputStreamReader(
@@ -81,19 +74,13 @@ public class FileTest {
 	public void testCountWords(){
 		//统计文章中文字出现的次数
 		Path path = Paths.get("files\\article.txt");
-		BufferedReader br = null;
-		try {
-			br = Files.newBufferedReader(path, Charset.forName("utf-8"));
+		try(BufferedReader br = Files.newBufferedReader(path, Charset.forName("utf-8"))){
 			Map<Object, Long> collect = br.lines()
 				.flatMap(line->line.chars().mapToObj(c->(char)c))
-				
 				.collect(Collectors.groupingBy(word->word, Collectors.counting()));
 			System.out.println(collect);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
-			if(br!=null)
-				try {br.close();} catch (IOException e) {e.printStackTrace();}
 		}
 	}
 	
